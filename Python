@@ -1,0 +1,33 @@
+class BeastScroll:
+    def __init__(self):
+        self.creatures = {}
+        self.last_updated = None
+
+    def add_creature(self, name, description, habitat, danger_level):
+        self.creatures[name] = {
+            'Description': description,
+            'Habitat': habitat,
+            'Danger Level': danger_level
+        }
+        self.last_updated = datetime.now()
+
+    def get_creature_info(self, name):
+        return self.creatures.get(name, "Creature not found in the scroll.")
+
+    def update_creature(self, name, field, new_info):
+        if name in self.creatures:
+            if field in self.creatures[name]:
+                self.creatures[name][field] = new_info
+                self.last_updated = datetime.now()
+                return f"{name}'s {field} has been updated."
+            else:
+                return f"Field '{field}' does not exist for creature '{name}'."
+        else:
+            return "Creature not found in the scroll."
+
+# Example usage:
+scroll = BeastScroll()
+scroll.add_creature("Griffin", "Majestic creature with body of lion and wings of eagle.", "Mountainous regions", "High")
+print(scroll.get_creature_info("Griffin"))
+
+
